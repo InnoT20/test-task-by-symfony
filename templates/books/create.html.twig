@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+{% block body %}
+
+    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+    <h1 class="h3 mb-3 font-weight-normal text-center">Create book</h1>
+
+    {{ form_label(form.title, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.title, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.title) }}
+
+    {{ form_label(form.release_date, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.release_date, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.release_date) }}
+
+    {{ form_label(form.rating, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.rating, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.rating) }}
+
+    {{ form_label(form.genre, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.genre, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.genre) }}
+
+    {{ form_label(form.author, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.author, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.author) }}
+
+    {{ form_widget(form.save, {'attr': {'class': 'btn btn-lg btn-primary btn-block', 'style': 'margin-top: 15px'}}) }}
+
+    {{ form_end(form) }}
+{% endblock %}
