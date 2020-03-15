@@ -30,6 +30,24 @@
                     <a class="nav-link" href="{{ path('genre_index') }}">Genres</a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav my-2 my-lg-0">
+                {% if app.user %}
+                    <li class="nav-item">
+                        <a class="nav-link">{{ app.user.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_register') }}">Register</a>
+                    </li>
+                {% endif %}
+            </ul>
         </div>
     </nav>
 

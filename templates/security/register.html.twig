@@ -1,0 +1,32 @@
+{% extends 'base-simple.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('css/signin.css') }}">
+{% endblock %}
+
+{% block header %}
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(form, {'attr': {'class': 'form-signin'}}) }}
+    <h1 class="h3 mb-3 font-weight-normal text-center">Register</h1>
+
+    {{ form_label(form.username, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.username, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.username) }}
+
+    {{ form_label(form.password.first, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.password.first, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.password.first) }}
+
+    {{ form_label(form.password.second, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.password.second, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.password.second) }}
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+    {{ form_end(form) }}
+{% endblock %}
