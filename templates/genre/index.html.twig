@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Genre list{% endblock %}
+
+{% block body %}
+    <div class="col">
+        <div style="margin-bottom: 20px;">
+            <a href="{{ path('genre_new') }}" class="btn btn-info">Add genre</a>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for genre in genres %}
+                <tr>
+                    <td>{{ genre.id }}</td>
+                    <td>{{ genre.title }}</td>
+                    <td>
+                        <a href="{{ path('genre_show', {'id': genre.id}) }}">show</a>
+                        <a href="{{ path('genre_edit', {'id': genre.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
