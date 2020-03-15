@@ -22,6 +22,7 @@
                     <td>{{ genre.id }}</td>
                     <td>{{ genre.title }}</td>
                     <td>
+                        <a href="{{ path('home', {'genre': genre.id}) }}">books</a>
                         <a href="{{ path('genre_show', {'id': genre.id}) }}">show</a>
                         <a href="{{ path('genre_edit', {'id': genre.id}) }}">edit</a>
                     </td>

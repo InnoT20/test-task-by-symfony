@@ -24,8 +24,8 @@
                     <td>{{ book.title }}</td>
                     <td>{{ book.releaseDate | date('d.m.Y') }}</td>
                     <td>{{ book.rating }}</td>
-                    <td>{{ book.genre.title }}</td>
-                    <td>{{ book.author.name }}</td>
+                    <td><a href="{{ path('home', {'genre': book.genre.id}) }}">{{ book.genre.title }}</a></td>
+                    <td><a href="{{ path('home', {'author': book.author.id}) }}">{{ book.author.name }}</a></td>
                     <td>{{ book.createdAt | date('d.m.Y H:i') }}</td>
                     <td>
                         <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
