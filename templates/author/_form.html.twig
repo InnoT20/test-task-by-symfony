@@ -1,0 +1,17 @@
+{{ form_start(form) }}
+    {{ form_label(form.name, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.name, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.name) }}
+
+    {{ form_label(form.birthday, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.birthday, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.birthday) }}
+
+    {{ form_label(form.sex, null, {'attr': {'class': 'sr-only'}}) }}
+    {{ form_widget(form.sex, {'attr': {'class': 'form-control'}}) }}
+    {{ form_errors(form.sex) }}
+
+<div style="margin-top: 15px;">
+    <button class="btn btn-success">{{ button_label|default('Save') }}</button>
+</div>
+{{ form_end(form) }}

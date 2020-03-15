@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Author list{% endblock %}
+
+{% block body %}
+    <div class="col">
+        <div style="margin-bottom: 20px;">
+            <a href="{{ path('author_new') }}" class="btn btn-info">Add author</a>
+        </div>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Birthday</th>
+                <th>Sex</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for author in authors %}
+                <tr>
+                    <td>#{{ author.id }}</td>
+                    <td>{{ author.name }}</td>
+                    <td>{{ author.birthday ? author.birthday|date('Y-m-d') : '' }}</td>
+                    <td>{{ author.sex }}</td>
+                    <td>
+                        <a href="{{ path('author_show', {'id': author.id}) }}">show</a>
+                        <a href="{{ path('author_edit', {'id': author.id}) }}">edit</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="5">no records found</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+{% endblock %}
