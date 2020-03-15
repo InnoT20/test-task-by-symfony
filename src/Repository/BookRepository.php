@@ -28,7 +28,9 @@ class BookRepository extends ServiceEntityRepository
 
     public function getPaginate($page = 1)
     {
-        $query = $this->createQueryBuilder('b')->orderBy('b.id', 'desc')->getQuery();
+        $query = $this->createQueryBuilder('b')
+            ->orderBy('b.id', 'desc')
+            ->getQuery();
 
         return $this->paginator->paginate($query, $page);
     }

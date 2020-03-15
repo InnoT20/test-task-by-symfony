@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Genre;
 use App\Form\GenreType;
 use App\Repository\GenreRepository;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -96,9 +97,15 @@ class GenreController extends AbstractController
     public function delete(Request $request, Genre $genre): Response
     {
         if ($this->isCsrfTokenValid('delete' . $genre->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($genre);
-            $entityManager->flush();
+            try {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($genre);
+                $entityManager->flush();
+            } catch (ForeignKeyConstraintViolationException $exception) {
+                $this->addFlash('error', "You can't delete this genre, because the genre has books in library.");
+
+                return $this->redirectToRoute('genre_show', ['id' => $genre->getId()]);
+            }
         }
 
         return $this->redirectToRoute('genre_index');

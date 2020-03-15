@@ -39,14 +39,14 @@ class Book
 
     /**
      * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Genre", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Genre", inversedBy="books", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $genre;
 
     /**
      * @Assert\NotBlank()
-     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books", fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      */
     private $author;
