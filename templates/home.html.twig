@@ -1,6 +1,9 @@
 {% extends "base.html.twig" %}
 {% block body %}
     <div class="col">
+        <div style="margin-bottom: 20px;">
+            <a href="{{ path('book_new') }}" class="btn btn-info">Add book</a>
+        </div>
         <table class="table">
             <thead>
             <tr>
@@ -11,6 +14,7 @@
                 <th>Genre</th>
                 <th>Author</th>
                 <th>Created At</th>
+                <th></th>
             </tr>
             </thead>
             <tbody>
@@ -23,6 +27,10 @@
                     <td>{{ book.genre.title }}</td>
                     <td>{{ book.author.name }}</td>
                     <td>{{ book.createdAt | date('d.m.Y H:i') }}</td>
+                    <td>
+                        <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
+                        <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>

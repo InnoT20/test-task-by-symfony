@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BookRepository")
@@ -17,27 +19,33 @@ class Book
     private $id;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="string", length=255)
      */
     private $title;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\Column(type="date")
      */
     private $release_date;
 
     /**
+     * @Assert\NotBlank()
+     * @Assert\Type("numeric")
      * @ORM\Column(type="float")
      */
     private $rating;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="App\Entity\Genre", inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
     private $genre;
 
     /**
+     * @Assert\NotBlank()
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="books")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -45,6 +53,7 @@ class Book
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Timestampable(on="create")
      */
     private $created_at;
 
