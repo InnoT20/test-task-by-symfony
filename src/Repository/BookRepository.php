@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Book;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Book|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,18 +15,22 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class BookRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Book::class);
+        $this->paginator = $paginator;
     }
 
-    public function findWithLimit($limit = 10)
+    public function getPaginate($page = 1)
     {
-        return $this->createQueryBuilder('b')
-            ->orderBy('b.id', 'desc')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+        $query = $this->createQueryBuilder('b')->orderBy('b.id', 'desc')->getQuery();
+
+        return $this->paginator->paginate($query, $page);
     }
 
     // /**

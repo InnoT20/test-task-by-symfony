@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Genre;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Knp\Component\Pager\PaginatorInterface;
 
 /**
  * @method Genre|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,9 +15,22 @@ use Doctrine\Common\Persistence\ManagerRegistry;
  */
 class GenreRepository extends ServiceEntityRepository
 {
-    public function __construct(ManagerRegistry $registry)
+    /**
+     * @var PaginatorInterface
+     */
+    private $paginator;
+
+    public function __construct(ManagerRegistry $registry, PaginatorInterface $paginator)
     {
         parent::__construct($registry, Genre::class);
+        $this->paginator = $paginator;
+    }
+
+    public function getPaginate($page = 1)
+    {
+        $query = $this->createQueryBuilder('b')->orderBy('b.id', 'desc')->getQuery();
+
+        return $this->paginator->paginate($query, $page, 50);
     }
 
     // /**
