@@ -4,7 +4,7 @@
 namespace App\Controller;
 
 
-use App\Entity\Book;
+use App\Filters\BookFilter;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,7 +21,9 @@ class HomeController extends AbstractController
      */
     public function index(BookRepository $repository, Request $request)
     {
-        $books = $repository->getPaginate($request->get('page', 1));
+        $filter = new BookFilter($request->query->all());
+
+        $books = $repository->getPaginate($filter, $request->get('page', 1));
 
         return $this->render('home.html.twig', [
             'books' => $books

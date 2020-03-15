@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Book;
+use App\Filters\BookFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 use Knp\Component\Pager\PaginatorInterface;
@@ -26,13 +27,13 @@ class BookRepository extends ServiceEntityRepository
         $this->paginator = $paginator;
     }
 
-    public function getPaginate($page = 1)
+    public function getPaginate(BookFilter $filter, $page = 1)
     {
-        $query = $this->createQueryBuilder('b')
-            ->orderBy('b.id', 'desc')
-            ->getQuery();
+        $query = $this->createQueryBuilder('b')->orderBy('b.id', 'desc');
 
-        return $this->paginator->paginate($query, $page);
+        $filter->apply($query);
+
+        return $this->paginator->paginate($query->getQuery(), $page);
     }
 
     // /**
